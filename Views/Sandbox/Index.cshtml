@@ -1,0 +1,41 @@
+@{
+    ViewData["Title"] = "Песочница";
+    bool canStart = ViewBag.CanStart ?? true;
+    TimeSpan? timeLeft = ViewBag.TimeLeft as TimeSpan?;
+    int attempts = ViewBag.Attempts ?? 0;
+    int totalCorrect = ViewBag.TotalCorrect ?? 0;
+}
+<div class="container mx-auto max-w-4xl px-4 py-10">
+    <div class="bg-white rounded-lg shadow-lg p-12">
+        <h1 class="text-3xl font-extrabold mb-4 text-center">Песочница</h1>
+        <p class="text-gray-700 mb-4">Песочница — это интерактивная площадка для практики знаний по ОБЖ. Здесь вы можете пройти мини-тест из 10 случайных вопросов по всем темам курса. Это отличный способ проверить себя и закрепить материал!</p>
+        <div class="mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-lg">
+            <p class="text-emerald-800 font-semibold">Внимание! Проходить песочницу можно только <span class="font-bold">1 раз каждый час</span>.</p>
+        </div>
+        <div class="mb-6 flex flex-col sm:flex-row sm:space-x-8 space-y-2 sm:space-y-0">
+            <div class="flex-1 bg-gray-50 rounded-lg p-4 text-center">
+                <div class="text-sm text-gray-500 mb-1">Всего попыток</div>
+                <div class="text-2xl font-bold text-emerald-700">@attempts</div>
+            </div>
+            <div class="flex-1 bg-gray-50 rounded-lg p-4 text-center">
+                <div class="text-sm text-gray-500 mb-1">Всего правильных ответов</div>
+                <div class="text-2xl font-bold text-emerald-700">@totalCorrect</div>
+            </div>
+        </div>
+        @if (canStart)
+        {
+            <form asp-action="Start" method="post">
+                <button type="submit" class="w-full py-3 px-6 bg-emerald-600 text-white font-bold rounded-lg hover:bg-emerald-700 transition text-lg">Начать</button>
+            </form>
+        }
+        else
+        {
+            <div class="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg text-yellow-800 text-center">
+                <svg class="w-6 h-6 inline-block mr-2 align-middle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 8v.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Следующая попытка будет доступна через <span class="font-bold">@((timeLeft?.Hours ?? 0)) ч. @((timeLeft?.Minutes ?? 0)) мин.</span>
+            </div>
+        }
+    </div>
+</div> 

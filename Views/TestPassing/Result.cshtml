@@ -1,0 +1,92 @@
+@{
+    ViewData["Title"] = "Результат теста";
+    int correct = (int)ViewBag.Correct;
+    int total = (int)ViewBag.Total;
+    int passing = (int)ViewBag.Passing;
+    bool passed = (bool)ViewBag.Passed;
+    int percentage = (int)(100.0 * correct / total);
+    double circleLength = 2 * Math.PI * 45; 
+    double dashoffset = (1 - percentage / 100.0) * circleLength;
+}
+
+<div class="container mx-auto max-w-2xl px-4 py-8">
+    <div class="mb-8">
+        <a href="@Url.Action("Details", "Tests", new { id = ViewBag.CourseId })" class="inline-flex items-center text-emerald-600 hover:text-emerald-700">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+            Назад к списку тестов
+        </a>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div class="p-8">
+            <h1 class="text-3xl font-bold mb-8 text-center">Результат теста</h1>
+
+            <div class="flex justify-center mb-8">
+                <div class="relative">
+                    <svg class="w-32 h-32" viewBox="0 0 100 100">
+                        <circle
+                            cx="50" cy="50" r="45"
+                            stroke="#e5e7eb" stroke-width="10"
+                            fill="none"
+                        />
+                        <circle
+                            cx="50" cy="50" r="45"
+                            stroke="#10b981" stroke-width="10"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-dasharray="@circleLength"
+                            stroke-dashoffset="@dashoffset"
+                            transform="rotate(-90 50 50)"
+                        />
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <span class="text-2xl font-bold">@percentage%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4 mb-8">
+                <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                    <span class="text-gray-600">Правильных ответов:</span>
+                    <span class="font-semibold">@correct из @total</span>
+                </div>
+                <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                    <span class="text-gray-600">Проходной балл:</span>
+                    <span class="font-semibold">@passing из @total</span>
+                </div>
+            </div>
+
+            @if (passed)
+            {
+                <div class="p-6 bg-emerald-50 border border-emerald-200 rounded-lg text-center">
+                    <svg class="w-16 h-16 text-emerald-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <h2 class="text-2xl font-bold text-emerald-800 mb-2">Поздравляем!</h2>
+                    <p class="text-emerald-600">Вы успешно прошли тест.</p>
+                </div>
+            }
+            else
+            {
+                <div class="p-6 bg-red-50 border border-red-200 rounded-lg text-center">
+                    <svg class="w-16 h-16 text-red-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <h2 class="text-2xl font-bold text-red-800 mb-2">Тест не пройден</h2>
+                    <p class="text-red-600">Попробуйте пройти тест ещё раз.</p>
+                </div>
+            }
+
+            <div class="mt-8 text-center">
+                <a href="@Url.Action("Start", "TestPassing", new { lessonId = ViewBag.LessonId })" class="inline-flex items-center px-6 py-3 bg-emerald-600 text-white font-semibold rounded-lg hover:bg-emerald-700 transition-colors duration-300">
+                    <span>Пройти тест снова</span>
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</div> 

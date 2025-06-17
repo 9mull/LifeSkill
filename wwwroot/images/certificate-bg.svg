@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="842" height="595" viewBox="0 0 842 595" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <pattern id="pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M0 20 L40 20 M20 0 L20 40" stroke="#2ecc71" stroke-width="0.5" stroke-opacity="0.1"/>
+        </pattern>
+        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#2ecc71;stop-opacity:0.05"/>
+            <stop offset="100%" style="stop-color:#27ae60;stop-opacity:0.05"/>
+        </linearGradient>
+    </defs>
+    <rect width="842" height="595" fill="#ffffff"/>
+    <rect width="842" height="595" fill="url(#pattern)"/>
+    <rect width="842" height="595" fill="url(#gradient)"/>
+    <circle cx="421" cy="297.5" r="250" fill="none" stroke="#2ecc71" stroke-width="1" stroke-opacity="0.1"/>
+    <circle cx="421" cy="297.5" r="200" fill="none" stroke="#2ecc71" stroke-width="1" stroke-opacity="0.1"/>
+    <circle cx="421" cy="297.5" r="150" fill="none" stroke="#2ecc71" stroke-width="1" stroke-opacity="0.1"/>
+    <path d="M0,297.5 L842,297.5" stroke="#2ecc71" stroke-width="1" stroke-opacity="0.1"/>
+    <path d="M421,0 L421,595" stroke="#2ecc71" stroke-width="1" stroke-opacity="0.1"/>
+</svg> 

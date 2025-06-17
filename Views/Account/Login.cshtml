@@ -1,0 +1,70 @@
+@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Вход";
+}
+
+<div class="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Вход в систему
+        </h2>
+        <p class="mt-2 text-center text-sm text-gray-600">
+            Или
+            <a href="@Url.Action("Register", "Account")" class="font-medium text-emerald-600 hover:text-emerald-500">
+                зарегистрируйтесь
+            </a>
+        </p>
+    </div>
+
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+            <form asp-controller="Account" asp-action="Login" method="post" class="space-y-6">
+                <div asp-validation-summary="All" class="text-red-500 text-sm"></div>
+                
+                <div>
+                    <label asp-for="Email" class="block text-sm font-medium text-gray-700">
+                        Email
+                    </label>
+                    <div class="mt-1">
+                        <input asp-for="Email" type="email" required 
+                               class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm">
+                        <span asp-validation-for="Email" class="text-red-500 text-sm"></span>
+                    </div>
+                </div>
+
+                <div>
+                    <label asp-for="Password" class="block text-sm font-medium text-gray-700">
+                        Пароль
+                    </label>
+                    <div class="mt-1">
+                        <input asp-for="Password" type="password" required
+                               class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm">
+                        <span asp-validation-for="Password" class="text-red-500 text-sm"></span>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input asp-for="RememberMe" type="checkbox"
+                               class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded">
+                        <label asp-for="RememberMe" class="ml-2 block text-sm text-gray-900">
+                            Запомнить меня
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit"
+                            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500">
+                        Войти
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+} 
